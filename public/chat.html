@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat | Chat App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body class="chat">
+<div class="chat__sidebar">
+    <h3>People</h3>
+    <ul id="users"></ul>
+</div>
+<div class="chat__main">
+    <ol id="messages" class="chat__messages"></ol>
+    <div class="chat__footer">
+        <form id="message-form">
+            <input name="message" type="text" placeholder="Write your message" autofocus autocomplete="off"/>
+            <button type="submit">Send</button>
+        </form>
+        <button id="send-location">Send location</button>
+        <label id="photo-label" for="photo-input">Send Photo</label>
+        <input type="file" id="photo-input" accept="image/*">
+        <div class="audio-controls">
+            <button id="start-record-btn">Start Recording</button>
+            <button id="stop-record-btn">Stop Recording</button>
+            <audio id="recorded-audio" controls style="display: none;"></audio>
+        </div>
+    </div>
+</div>
+<script id="message-template" type="text/template">
+    <li class="message">
+        <div class="message__title">
+            <h4>{{from}}</h4>
+            <span>{{createdAt}}</span>
+        </div>
+        <div class="message__body">
+            {{{element}}}
+        </div>
+    </li>
+</script>
+<script src="/js/libs/jquery-3.7.1.js"></script>
+<script src="/js/libs/deparam.js"></script>
+<script src="/js/libs/moment.js"></script>
+<script src="/js/libs/mustache.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/chat.js"></script>
+
+</body>
+</html>
