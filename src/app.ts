@@ -23,7 +23,7 @@ app.enable('trust proxy');
 app.use(cors());
 //here we apply preflight request
 app.options('*',cors());
-app.use(express.static('./public'));
+app.use(express.static(path.join(__dirname, 'public')));
 //Set security headers
 app.use(
     helmet({
