@@ -1,9 +1,9 @@
-
 ---
 
 # Chat App with Room Creation and Multimedia Messaging
 
-This project is a real-time chat application built using TypeScript, Node.js, Express, jQuery, HTML, and Socket.IO. It allows users to create chat rooms, exchange text messages, send voice notes, share files, and send locations.
+This project is a real-time chat application built using TypeScript, Node.js, Express, jQuery, HTML, and Socket.IO. It allows users to create chat rooms, exchange text messages, send voice notes, share photos, and send locations.
+## 🎥 [Demo Video](https://drive.google.com/file/d/1KdS2CQTIq44EJHrYJ3eRj_s4V7lsj0ZC/view?usp=sharing)
 
 ## Table of Contents
 
@@ -19,7 +19,7 @@ This project is a real-time chat application built using TypeScript, Node.js, Ex
 - **Room Creation:** Users can create chat rooms with unique names.
 - **Real-Time Messaging:** Exchange text messages instantly within the chat rooms.
 - **Voice Notes:** Record and send voice notes to other users.
-- **File Sharing:** Share files such as images, documents, etc., with other users.
+- **Photo Sharing:** Share photos with other users.
 - **Location Sharing:** Share your current location with other users in real-time.
 
 ## Technologies Used
@@ -53,8 +53,12 @@ This project is a real-time chat application built using TypeScript, Node.js, Ex
 
 3. Create a new room or join an existing one.
 
-4. Start chatting! Use the interface to send text messages, voice notes, share files, or send your location.
+4. Start chatting! Use the interface to send text messages, voice notes, share photos, or send your location.
 
 ## Contributing
 
 Contributions are welcome! Please fork the repository and submit a pull request with your changes. For major changes, please open an issue first to discuss what you would like to change.
+
+---
+
+Feel free to make any additional modifications as needed!
