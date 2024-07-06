@@ -12,14 +12,16 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import {generateMessage, generateLocationMessage, generateData} from "./utils/message.js";
 import {isRealString} from "./utils/validation";
-import {Users} from "./utils/users";
+import {users} from "./utils/users";
+
 
 dotenv.config({path:path.join(__dirname,'./config.env')})
 const PORT=process.env.PORT||3000;
+
 const server=http.createServer(app);
 const io = socketIO(server);
 
-const users=new Users();
+
 io.on('connection',(socket:any)=>{
     console.log("new user connected");
 

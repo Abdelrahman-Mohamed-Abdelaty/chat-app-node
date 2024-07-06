@@ -1,3 +1,32 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Join | Chat app</title>-->
+<!--    <meta name="viewport" content="width=device, initial-scale=1, user-scalable=no">-->
+<!--    <link rel="stylesheet" href="/stylesheets/style.css">-->
+<!--</head>-->
+<!--<body class="centered-form">-->
+<!--<div class="centered-form__form">-->
+<!--    <form action="/chat.html">-->
+<!--        <div class="form-field">-->
+<!--            <h3>Join a Chat</h3>-->
+<!--        </div>-->
+<!--        <div class="form-field">-->
+<!--            <label> Display name</label>-->
+<!--            <input type="text" name="name" autofocus/>-->
+<!--        </div>-->
+<!--        <div class="form-field">-->
+<!--            <label> Room name</label>-->
+<!--            <input type="text" name="room"/>-->
+<!--        </div>-->
+<!--        <div class="form-field">-->
+<!--            <button>Join</button>-->
+<!--        </div>-->
+<!--    </form>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,25 +34,46 @@
     <title>Join | Chat app</title>
     <meta name="viewport" content="width=device, initial-scale=1, user-scalable=no">
     <link rel="stylesheet" href="/stylesheets/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body class="centered-form">
-    <div class="centered-form__form">
-        <form action="/chat.html">
-            <div class="form-field">
-                <h3>Join a Chat</h3>
-            </div>
-            <div class="form-field">
-                <label> Display name</label>
-                <input type="text" name="name" autofocus/>
-            </div>
-            <div class="form-field">
-                <label> Room name</label>
-                <input type="text" name="room"/>
-            </div>
-            <div class="form-field">
-                <button>Join</button>
-            </div>
-        </form>
-    </div>
+<div class="centered-form__form">
+    <form action="/chat.html">
+        <div class="form-field">
+            <h3>Join a Chat</h3>
+        </div>
+        <div class="form-field">
+            <label>Display name</label>
+            <input type="text" name="name" autofocus/>
+        </div>
+        <div class="form-field">
+            <label>Room name</label>
+            <input list="room-options" id="room" name="room">
+            <datalist id="room-options">
+                <!-- Options will be dynamically added here -->
+            </datalist>
+        </div>
+        <div class="form-field">
+            <button type="submit">Join</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', async function() {
+        const options =await axios('/api');
+        console.log(options.data);
+        const dataList = document.getElementById('room-options');
+        const input = document.getElementById('room');
+
+        // Populate datalist with initial options
+        options.data.forEach(option => {
+            const optionElement = document.createElement('option');
+            optionElement.value = option;
+            dataList.appendChild(optionElement);
+        });
+
+    });
+</script>
 </body>
 </html>

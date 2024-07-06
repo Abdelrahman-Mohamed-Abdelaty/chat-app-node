@@ -55,3 +55,13 @@ button,button:hover{border:none;color:#fff;padding:10px}.chat__messages,.chat__s
     margin-left: 10px;
     max-width: 200px;
 }
+#leave-room{
+background-color: #8e1b1b;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 50px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+
+}

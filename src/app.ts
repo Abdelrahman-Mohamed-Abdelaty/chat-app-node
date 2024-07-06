@@ -3,6 +3,7 @@ import express, {query} from 'express'
 import morgan from "morgan";
 import cookieParser from 'cookie-parser';
 import rateLimit from "express-rate-limit";
+import {users} from './utils/users'
 // @ts-ignore
 import xss from "xss-clean";
 import mongoSantize from "express-mongo-sanitize";
@@ -82,7 +83,7 @@ if(process.env.NODE_ENV==="development"){
 
 //routes
 app.get('/api',(req,res,next)=>{
-    res.status(200).json({data:"success"});
+    res.status(200).json(users.getAllRooms());
 })
 
 

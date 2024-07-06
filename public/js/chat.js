@@ -8,7 +8,7 @@ socket.on('connect',function (){
             alert(err);
             window.location.href='/';
         }else {
-            console.log('No error');
+            jQuery('#chat-name').text(`${params.room} room`);
         }
     })
 })
@@ -36,10 +36,11 @@ socket.on('updateUserList',function (users){
 const renderMessages=function (msg,body){
     const formatedTime = moment(msg.createdAt).format('h:mm a')
     const template = jQuery('#message-template').html();
+    const params=jQuery.deparam(window.location.search);
     const html=Mustache.render(template,{
         element:body,
         createdAt:formatedTime,
-        from:msg.from,
+        from:(msg.from===params.name)?'You':msg.from,
     })
     jQuery('#messages').append(html);
     scrollToBottom();
@@ -172,3 +173,8 @@ socket.on('newPhotoMessage',function (msg){
     const body=`<img src="${msg.url}" alt="User photo" style="max-width: 100%;">`
     renderMessages(msg,body);
 });
+
+jQuery('#leave-room').on('click',function (){
+    socket.emit('disconnect');
+    window.location.href ='/index.html';
+})

@@ -1,4 +1,4 @@
-export class Users{
+class Users{
     private users: any[];
     constructor() {
         this.users=[];
@@ -23,4 +23,14 @@ export class Users{
         }
         return user;
     }
+    getAllRooms():string[]{
+        const rooms=[] as string[];
+        this.users.forEach((user)=>{
+            if(!rooms.includes(user.room)){
+                rooms.push(user.room);
+            }
+        })
+        return rooms;
+    }
 }
+export const users=new Users();

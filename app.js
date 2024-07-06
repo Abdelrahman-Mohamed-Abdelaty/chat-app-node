@@ -8,6 +8,7 @@ const express_1 = __importDefault(require("express"));
 const morgan_1 = __importDefault(require("morgan"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const express_rate_limit_1 = __importDefault(require("express-rate-limit"));
+const users_1 = require("./utils/users");
 // @ts-ignore
 const xss_clean_1 = __importDefault(require("xss-clean"));
 const express_mongo_sanitize_1 = __importDefault(require("express-mongo-sanitize"));
@@ -79,7 +80,7 @@ if (process.env.NODE_ENV === "development") {
 }
 //routes
 app.get('/api', (req, res, next) => {
-    res.status(200).json({ data: "success" });
+    res.status(200).json(users_1.users.getAllRooms());
 });
 app.all("*", (req, res, next) => {
     const err = new appError_1.default(`Can't find ${req.originalUrl} on this server`, 404);

@@ -43,7 +43,6 @@ dotenv_1.default.config({ path: path_1.default.join(__dirname, './config.env') }
 const PORT = process.env.PORT || 3000;
 const server = http.createServer(app_1.default);
 const io = (0, socket_io_1.default)(server);
-const users = new users_1.Users();
 io.on('connection', (socket) => {
     console.log("new user connected");
     socket.on('join', (params, cb) => {
@@ -52,7 +51,7 @@ io.on('connection', (socket) => {
         }
         params.room = params.room.toLowerCase();
         params.name = params.name.toLowerCase();
-        const roomUsersWithSameName = users.getUserList(params.room).filter((user) => user === params.name);
+        const roomUsersWithSameName = users_1.users.getUserList(params.room).filter((user) => user === params.name);
         if (roomUsersWithSameName.length > 0) {
             return cb('This name is used in this room. Please use another one');
         }
@@ -61,28 +60,28 @@ io.on('connection', (socket) => {
         //socket.broadcast.emit for all except me-->socket.broadcast.to(roomName).emit()
         socket.join(params.room);
         //socket.leave(name of the room);
-        users.removeUser(socket.id);
-        users.addUser(socket.id, params.name, params.room);
-        io.to(params.room).emit('updateUserList', users.getUserList(params.room));
+        users_1.users.removeUser(socket.id);
+        users_1.users.addUser(socket.id, params.name, params.room);
+        io.to(params.room).emit('updateUserList', users_1.users.getUserList(params.room));
         socket.emit('newMessage', (0, message_js_1.generateMessage)("Admin", "welcome to our chat app"));
         socket.broadcast.to(params.room).emit('newMessage', (0, message_js_1.generateMessage)("Admin", `${params.name} has joined`));
         cb();
     });
     socket.on('createMessage', (msg, cb) => {
-        const user = users.getUser(socket.id);
+        const user = users_1.users.getUser(socket.id);
         if (user && (0, validation_1.isRealString)(msg.text)) {
             io.to(user.room).emit('newMessage', (0, message_js_1.generateMessage)(user.name, msg.text));
         }
         cb(); //what you pass here send it the function in the emit
     });
     socket.on('createLocationMessage', (coords) => {
-        const user = users.getUser(socket.id);
+        const user = users_1.users.getUser(socket.id);
         if (user) {
             io.to(user.room).emit('newLocationMessage', (0, message_js_1.generateLocationMessage)(user.name, coords.latitude, coords.longitude));
         }
     });
     const handleData = (msg, event) => {
-        const user = users.getUser(socket.id);
+        const user = users_1.users.getUser(socket.id);
         if (user) {
             io.to(user.room).emit(event, (0, message_js_1.generateData)(user.name, msg.data));
         }
@@ -94,9 +93,9 @@ io.on('connection', (socket) => {
         handleData(msg, 'newAudioMessage');
     });
     socket.on('disconnect', () => {
-        const user = users.removeUser(socket.id);
+        const user = users_1.users.removeUser(socket.id);
         if (user) {
-            io.to(user.room).emit('updateUserList', users.getUserList(user.room));
+            io.to(user.room).emit('updateUserList', users_1.users.getUserList(user.room));
             io.to(user.room).emit('newMessage', (0, message_js_1.generateMessage)('Admin', `${user.name} has leaved the room`));
         }
     });

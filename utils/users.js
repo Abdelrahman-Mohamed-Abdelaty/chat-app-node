@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Users = void 0;
+exports.users = void 0;
 class Users {
     constructor() {
         this.users = [];
@@ -25,5 +25,14 @@ class Users {
         }
         return user;
     }
+    getAllRooms() {
+        const rooms = [];
+        this.users.forEach((user) => {
+            if (!rooms.includes(user.room)) {
+                rooms.push(user.room);
+            }
+        });
+        return rooms;
+    }
 }
-exports.Users = Users;
+exports.users = new Users();
