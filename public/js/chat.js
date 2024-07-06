@@ -1,5 +1,7 @@
 //create a connection with the server
-let socket=io();
+let socket=io('https://chat-app-node-five.vercel.app/',{
+    transports: ['polling']
+});
 socket.on('connect',function (){
     console.log('connected to the server')
     const params=jQuery.deparam(window.location.search);

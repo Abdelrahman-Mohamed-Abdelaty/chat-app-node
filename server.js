@@ -42,7 +42,13 @@ const users_1 = require("./utils/users");
 dotenv_1.default.config({ path: path_1.default.join(__dirname, './config.env') });
 const PORT = process.env.PORT || 3000;
 const server = http.createServer(app_1.default);
-const io = (0, socket_io_1.default)(server);
+const io = (0, socket_io_1.default)(server, {
+    cors: {
+        origin: "*", // Allow all origins
+        methods: ["GET", "POST"]
+    },
+    transports: ['polling'] // Force polling transport
+});
 io.on('connection', (socket) => {
     console.log("new user connected");
     socket.on('join', (params, cb) => {

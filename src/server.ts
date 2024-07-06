@@ -19,7 +19,13 @@ dotenv.config({path:path.join(__dirname,'./config.env')})
 const PORT=process.env.PORT||3000;
 
 const server=http.createServer(app);
-const io = socketIO(server);
+const io = socketIO(server,{
+    cors: {
+        origin: "*", // Allow all origins
+        methods: ["GET", "POST"]
+    },
+    transports: ['polling'] // Force polling transport
+});
 
 
 io.on('connection',(socket:any)=>{
